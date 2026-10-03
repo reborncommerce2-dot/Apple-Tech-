@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+  admin.html = panel privado del vendedor.
+  Usa el mismo "esqueleto" visual que index.html (app-shell, ambient-glow,
+  header con logo) para que se sienta parte de la misma app, no una
+  pantalla aparte pegada con alfileres.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de administración</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <main class="app-shell">
+
+    <!-- ===================== LOGIN ===================== -->
+    <section class="screen intro-screen" id="loginView">
+      <div class="intro-glow" aria-hidden="true"></div>
+      <img src="assets/logo.png" alt="" class="intro-logo" aria-hidden="true">
+      <h1 class="intro-title" style="font-size:26px;">Panel de administración</h1>
+      <p class="intro-subtitle">Ingresá tus credenciales de vendedor para gestionar precios, catálogo y contacto.</p>
+
+      <form id="loginForm" class="admin-login-form" autocomplete="on">
+        <input id="loginUser" type="email" class="select-input" placeholder="Email" autocomplete="email" required>
+        <input id="loginPass" type="password" class="select-input" placeholder="Contraseña" autocomplete="current-password" required>
+        <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+        <p class="admin-login-error" id="loginError" role="alert" hidden></p>
+        <p class="admin-inline-message is-success" id="loginInfo" role="status" hidden></p>
+        <button type="button" class="admin-link-btn" id="btnForgot">¿Olvidaste tu contraseña?</button>
+      </form>
+    </section>
+
+    <!-- ===================== NUEVA CONTRASEÑA (link del email) ===================== -->
+    <section class="screen intro-screen" id="recoveryView" hidden>
+      <div class="intro-glow" aria-hidden="true"></div>
+      <img src="assets/logo.png" alt="" class="intro-logo" aria-hidden="true">
+      <h1 class="intro-title" style="font-size:26px;">Elegí una contraseña nueva</h1>
+      <p class="intro-subtitle">Usá al menos 8 caracteres.</p>
+      <form id="recoveryForm" class="admin-login-form" autocomplete="off">
+        <input id="recPass" type="password" class="select-input" placeholder="Contraseña nueva" autocomplete="new-password" required>
+        <input id="recPass2" type="password" class="select-input" placeholder="Repetir contraseña" autocomplete="new-password" required>
+        <button type="submit" class="btn btn-primary btn-full">Guardar contraseña</button>
+        <p class="admin-login-error" id="recoveryError" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- ===================== PANEL ===================== -->
+    <section class="screen admin-screen" id="panelView" hidden>
+
+      <header class="app-header admin-header">
+        <div class="brand">
+          <img src="assets/logo.png" alt="" class="brand-logo">
+          <div class="brand-text">
+            <span class="brand-name" id="adminBrandName">Apple Tech</span>
+            <span class="brand-tag">Panel de administración</span>
+          </div>
+        </div>
+        <button class="admin-logout-btn" id="btnLogout" title="Cerrar sesión">Salir</button>
+      </header>
+
+      <!-- Estado REAL del guardado: guardando / guardado / error (con Reintentar). -->
+      <div class="sync-banner" id="syncBanner" role="status" aria-live="polite" hidden>
+        <span class="sync-text" id="syncText"></span>
+        <button type="button" class="sync-retry" id="syncRetry" hidden>Reintentar</button>
+      </div>
+
+      <nav class="admin-tabs" id="adminTabs">
+        <button class="admin-tab is-active" data-tab="dashboard">Resumen</button>
+        <button class="admin-tab" data-tab="catalog">Catálogo</button>
+        <button class="admin-tab" data-tab="valuation">Valoración</button>
+        <button class="admin-tab" data-tab="capacities">Capacidades</button>
+        <button class="admin-tab" data-tab="damages">Desperfectos</button>
+        <button class="admin-tab" data-tab="battery">Batería</button>
+        <button class="admin-tab" data-tab="history">Historial</button>
+        <button class="admin-tab" data-tab="leads">Leads</button>
+        <button class="admin-tab" data-tab="activity">Actividad</button>
+        <button class="admin-tab" data-tab="contact">Contacto</button>
+        <button class="admin-tab" data-tab="backups">Backups</button>
+        <button class="admin-tab" data-tab="security">Seguridad</button>
+      </nav>
+
+      <div class="step-scroll admin-content" id="tabContent"><!-- JS renderiza acá --></div>
+
+    </section>
+
+  </main>
+
+  <!-- Ver el comentario equivalente en index.html: mismo motivo. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="config.js"></script>
+  <script src="services.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

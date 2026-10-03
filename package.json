@@ -1,0 +1,17 @@
+{
+  "name": "appletech-online",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Apple Tech: cotizador público + panel de administración sobre Supabase",
+  "scripts": {
+    "test": "node test/services.test.js",
+    "test:e2e": "node test/e2e.js",
+    "test:all": "node test/services.test.js && node test/e2e.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
